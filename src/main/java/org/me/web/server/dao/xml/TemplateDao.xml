@@ -10,7 +10,64 @@
 		from template where strId = #{strId}
 	</select>
 	
+	<select id="getListByMap" parameterType="Map" resultType="org.me.web.server.entity.Template">
+		select 
+			<include refid="base_select" />
+		from template
+		<where>
+			<include refid="base_where" />
+		</where>
+		<include refid="order" />
+		<include refid="limit" />
+	</select>
+	
+	<select id="getListSizeByMap" parameterType="Map" resultType="Integer">
+		select count(1) from template
+		<where>
+			<include refid="base_where" />
+		</where>
+	</select>
+	
+	<sql id="base_select">
+		strId,strName,nType,strDescription,nState,dtUpdateTime
+	</sql>
+	
+	<sql id="base_where">
+		<if test="strId != null">
+			and strId = #{strId}
+		</if>
+		<if test="strName != null">
+			and strName like CONCAT('%',#{strName},'%')
+		</if>
+		<if test="nType != null">
+			and nType = #{nType}
+		</if>
+		<if test="strDescription != null">
+			and strDescription like CONCAT('%',#{strDescription},'%')
+		</if>
+		<if test="nState != null">
+			and nState = #{nState}
+		</if>
+	</sql>
+
 	<sql id="base_select_detail">
 		strId,strName,nType,strDescription,tContent,nState,dtUpdateTime
+	</sql>
+	
+	<sql id="order">
+		<choose>
+			<when test="orderBy != null and orderBy != ''">
+				 order by #{orderBy}
+			</when>
+			<otherwise>
+				 order by dtUpdateTime desc
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<sql id="limit">
+		<if test="startIndex != null and startIndex &gt;= 0 and numPerPage !=null and numPerPage &gt;= 0">
+			 limit #{startIndex},#{numPerPage}
+		</if>
 	</sql>
 </mapper>

@@ -26,7 +26,10 @@ VALUES
 ('002-002-002', '002-002', '栏目添加', 'category:add', '栏目添加', '1', '0', now()),
 ('002-002-003', '002-002', '栏目添加修改', 'category:saveOrUpdate', '栏目添加修改', '1', '0', now()),
 ('002-002-004', '002-002', '栏目删除', 'category:del', '栏目删除', '1', '0', now()),
-('002-002-005', '002-002', '栏目查询', 'category:query', '栏目查询', '1', '0', now());
+('002-002-005', '002-002', '栏目查询', 'category:query', '栏目查询', '1', '0', now()),
+
+('002-003', '002', '模版管理', '/system/template/list', '模版管理', '0', '0', now()),
+('002-003-001', '002-002', '模版查询', 'template:query', '模版查询', '1', '0', now());
 
 -- 初始化部门数据
 INSERT INTO `department` (`strId`,`strPid`,`strName`,`strDescription`,`nState`,`dtCreateTime`,`nChild`,`strLevel`)
